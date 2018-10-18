@@ -2,17 +2,13 @@ var express = require('express');
 const HttpStatus = require('http-status-codes');
 var router = express.Router();
 
-
-// GET home page.
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
-});
-
 //GET some list
-router.get('/somelist', function(req, res, next) {
-  var liste_id = {"body": ["1","2"]};
-  res.status(HttpStatus.OK).json(liste_id).send();  
+router.get('/search', function(req, res, next) {
+  var words = req.query.words;
+  var list_words=words.split('|')
+  
+  var list_id={'id': list_words}
+  res.status(HttpStatus.OK).send(list_id);  
 });
-
 
 module.exports = router;
